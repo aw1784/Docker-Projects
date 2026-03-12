@@ -1,0 +1,26 @@
+services:
+
+  web:
+    image: ahmedwalid1410/my-webserver:latest
+    container_name: webserver
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: devops
+      POSTGRES_PASSWORD: devops123
+      POSTGRES_DB: devopsdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
